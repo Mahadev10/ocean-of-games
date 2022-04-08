@@ -12,7 +12,9 @@ const Home = () => {
   // get the location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
-
+  if (location.pathname === "/") {
+    document.body.style.overflow = "auto";
+  }
   // FETCH GAMES
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,7 +37,9 @@ const Home = () => {
         {searched.length ? (
           <div className="searched">
             <h2>Search Results</h2>
-            <button onClick={clearResults} className="clear">clear</button>
+            <button onClick={clearResults} className="clear">
+              clear
+            </button>
             <Games>
               {searched.map((game) => (
                 <Game
@@ -87,6 +91,7 @@ const Home = () => {
             />
           ))}
         </Games>
+        <p className="author">Created by <a href="https://github.com/Mahadev10" target="_blank" rel="noopener noreferrer">Mahadev</a></p>
       </AnimateSharedLayout>
     </GameList>
   );
@@ -109,6 +114,13 @@ const GameList = styled(motion.div)`
     border: none;
     outline: none;
     border-radius: 5px;
+  }
+  p{
+    text-align:center;
+    a{
+      text-decoration:none;
+      color:#ff7676;
+    }
   }
   @media screen and (max-width: 500px) {
     h2 {
